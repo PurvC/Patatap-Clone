@@ -4,24 +4,27 @@
 	<title>Circles</title>
 	<script type="text/javascript" src="paper-full.js"></script>
 	<link rel="stylesheet" type="text/css" href="circles.css">
+
 	<script type="text/paperscript" canvas="myCanvas">
-	// Create a Paper.js Path to draw a line into it:
-	var path = new Path();
 
-	var myCircle = new Path.Circle(new Point(100, 70), 10);
-	myCircle.fillColor = 'red';
+		var circles = [];
 
-	function onKeyDown(event) {
-	var maxPoint = new Point(view.size.width, view.size.height);
-	var randomPoint = Point.random();
-	var point = maxPoint * randomPoint;
+	function onKeyDown(event){
+		var maxPoint = new Point(view.size.width, view.size.height);
+		var randomPoint = Point.random();
+		var point = maxPoint * randomPoint;
+		var newCircle = new Path.Circle(point, 500);
+		newCircle.fillColor = "orange";
+		circles.push(newCircle);
+	}
 
-	// When a key is pressed, set the content of the text item:
-	new Path.Circle(new Point(point), 15).fillColor = 'orange';
-	console.log(view.size);
-}
-
-
+	function onFrame(event){
+		for(var i = 0; i < circles.length; i++){
+			console.log(circles[i]);
+			circles[i].fillColor.hue += 1;
+			circles[i].scale(0.90);
+		}
+	}
 </script>
 </head>
 <body>
